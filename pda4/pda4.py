@@ -70,7 +70,7 @@ class McDonaldsMenu:
             (string, int) | None: Name and calories of the current menu item
         """
         # Return none if we've run out of items
-        if len(self.products) == 0:
+        if not self.products:
             return None
 
         # Get and remove a random item from the list of products
@@ -252,7 +252,7 @@ class OrderItem(Relation):
 
 
 def export(relations):
-    if len(relations) == 0:
+    if not relations:
         print("No relations to export")
         return
 
@@ -278,7 +278,7 @@ def export(relations):
 def print_results(relations):
     PRINT_LIMIT = 10
 
-    if len(relations) == 0:
+    if not relations:
         print("No tuples to print.")
         return
 
@@ -317,7 +317,7 @@ def main():
         # the orders to generate the order items.
         orderItems.extend([
             OrderItem(associations=[order, random.choice(items)])
-            for _ in range(random.randint(1, 10))
+            for _ in range(random.randint(1, 4))
         ])
 
     # Print the generated tuples for each relation
