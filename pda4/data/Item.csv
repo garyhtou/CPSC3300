@@ -1,0 +1,261 @@
+id,name,price_cents,calories
+1,"Ranch Snack Wrap (Crispy Chicken)",41,NULL
+2,"Chocolate Shake (Medium)",895,700
+3,"Frappé Chocolate Chip (Large)",511,760
+4,"Premium McWrap Chicken & Ranch (Crispy Chicken)",877,610
+5,"Hazelnut Iced Coffee (Medium)",111,180
+6,"Iced Mocha (Small)",289,290
+7,"McFlurry with M&M’s Candies (Snack)",902,NULL
+8,"Bacon Buffalo Ranch McChicken",504,430
+9,""Steak",1157,8.5 oz (241 g)
+10,"Bacon McDouble",1096,440
+11,"Fat Free Chocolate Milk Jug",583,130
+12,"Mango Pineapple Smoothie (Medium)",228,260
+13,"Bacon Clubhouse Grilled Chicken Sandwich",1173,590
+14,""Sausage",725,NULL
+15,"Nonfat Caramel Latte (Large)",58,310
+16,"Minute Maid Orange Juice (Small)",420,NULL
+17,""Bacon",1359,5.8 oz (164 g)
+18,"Hot Chocolate (Small)",502,360
+19,"Big Breakfast with Egg Whites (Regular Biscuit)",1171,NULL
+20,"Hot Chocolate with Nonfat Milk (Medium)",312,340
+21,"McFlurry with M&M’s Candies (Medium)",565,930
+22,"Hot Fudge Sundae",707,330
+23,"McRib",1174,500
+24,"Strawberry Shake (Small)",856,550
+25,"McFlurry with Oreo Cookies (Medium)",392,690
+26,"Blueberry Pomegranate Smoothie (Small)",750,220
+27,"Premium McWrap Chicken Sweet Chili (Crispy Chicken)",595,540
+28,"Nonfat Latte with Sugar Free French Vanilla Syrup (Large)",858,220
+29,"Sprite (Small)",614,NULL
+30,"Coffee (Medium)",1435,0
+31,"Diet Coke (Child)",491,0
+32,"Frappé Chocolate Chip (Medium)",49,630
+33,"Nonfat Hazelnut Latte (Large)",1030,NULL
+34,"Big Mac",660,530
+35,"McFlurry with Oreo Cookies (Small)",16,510
+36,"Iced Mocha with Nonfat Milk (Medium)",614,290
+37,"Diet Dr Pepper (Large)",1084,0
+38,"Iced Mocha (Medium)",682,350
+39,"Hot Chocolate (Large)",671,NULL
+40,""Bacon",179,5.3 oz (150 g)
+41,"Premium Bacon Ranch Salad with Crispy Chicken",1398,380
+42,"Nonfat French Vanilla Latte (Small)",193,190
+43,"Premium McWrap Chicken & Ranch (Grilled Chicken)",641,450
+44,"Diet Dr Pepper (Medium)",36,NULL
+45,"French Vanilla Iced Coffee (Large)",1359,240
+46,"Coffee (Small)",1362,0
+47,"Hot Chocolate with Nonfat Milk (Large)",1019,400
+48,"Latte (Medium)",907,210
+49,"Big Breakfast with Hotcakes and Egg Whites (Large Biscuit)",463,1050
+50,"Bacon Clubhouse Crispy Chicken Sandwich",703,750
+51,"Hazelnut Latte (Small)",1185,270
+52,""Bacon",1255,6.1 oz (174 g)
+53,"Premium Crispy Chicken Club Sandwich",1281,670
+54,"Quarter Pounder Deluxe",691,540
+55,"Nonfat Caramel Mocha (Large)",365,370
+56,"Mocha (Large)",180,500
+57,"Fruit & Maple Oatmeal without Brown Sugar",484,260
+58,"Double Quarter Pounder with Cheese",895,750
+59,"Diet Coke (Small)",646,0
+60,"Caramel Mocha (Medium)",225,390
+61,"Cheeseburger",324,290
+62,"Iced Mocha with Nonfat Milk (Large)",716,390
+63,"Hash Brown",986,150
+64,"Chipotle BBQ Snack Wrap (Crispy Chicken)",402,340
+65,"Small French Fries",1452,230
+66,"Egg McMuffin",439,300
+67,"Coffee (Large)",340,0
+68,"Regular Iced Coffee (Small)",267,140
+69,"Quarter Pounder with Cheese",177,520
+70,"Strawberry Banana Smoothie (Medium)",1062,250
+71,"Sausage McMuffin with Egg Whites",588,400
+72,""Sausage",593,7.2 oz (205 g)
+73,"Sprite (Child)",1214,100
+74,"Nonfat Caramel Latte (Medium)",1106,250
+75,""Bacon",1110,6.9 oz (197 g)
+76,"Sprite (Medium)",778,200
+77,"Big Breakfast with Hotcakes (Regular Biscuit)",1166,1090
+78,"Frappé Chocolate Chip (Small)",1420,530
+79,"Sweet Tea (Small)",526,150
+80,"Premium Crispy Chicken Ranch BLT Sandwich",501,610
+81,"Premium McWrap Chicken & Bacon (Crispy Chicken)",414,630
+82,"Sweet Tea (Child)",240,110
+83,"Dr Pepper (Medium)",1476,190
+84,"Caramel Mocha (Large)",810,480
+85,"Premium McWrap Chicken Sweet Chili (Grilled Chicken)",723,380
+86,"Premium Grilled Chicken Classic Sandwich",1085,350
+87,"Big Breakfast (Regular Biscuit)",1257,740
+88,"McDouble",902,380
+89,"Hot Chocolate with Nonfat Milk (Small)",987,280
+90,"Sausage Biscuit (Large Biscuit)",976,480
+91,"Strawberry Banana Smoothie (Large)",1306,NULL
+92,""Bacon",348,5.4 oz (153 g)
+93,"Mango Pineapple Smoothie (Large)",1453,340
+94,"Premium Grilled Chicken Ranch BLT Sandwich",843,450
+95,"Sausage McGriddles",379,420
+96,"Sausage Biscuit with Egg Whites (Large Biscuit)",1159,520
+97,"Nonfat Latte (Medium)",1163,NULL
+98,"Latte with Sugar Free French Vanilla Syrup (Large)",1238,NULL
+99,"Iced Tea (Small)",672,0
+100,"Frappé Mocha (Small)",1027,450
+101,"Chocolate Chip Cookie",759,160
+102,"Caramel Latte (Medium)",16,340
+103,"Bacon Cheddar McChicken",89,480
+104,"Blueberry Pomegranate Smoothie (Medium)",1276,260
+105,"Coca-Cola Classic (Large)",562,280
+106,"Southern Style Crispy Chicken Sandwich",299,430
+107,"French Vanilla Latte (Small)",979,260
+108,"Premium Bacon Ranch Salad with Grilled Chicken",708,220
+109,"Vanilla Shake (Medium)",433,660
+110,"Frappé Caramel (Medium)",826,550
+111,"Iced Nonfat Caramel Mocha (Medium)",1446,270
+112,"Latte (Large)",98,280
+113,"Premium Southwest Salad (without Chicken)",913,140
+114,"Sweet Tea (Medium)",1302,180
+115,"Coca-Cola Classic (Small)",1204,140
+116,"Coca-Cola Classic (Child)",418,100
+117,"Latte with Sugar Free French Vanilla Syrup (Small)",581,210
+118,"Hot Chocolate (Medium)",657,440
+119,"Chicken McNuggets (40 piece)",422,1880
+120,"Honey Mustard Snack Wrap (Grilled Chicken)",415,250
+121,"Premium McWrap Chicken & Bacon (Grilled Chicken)",1124,480
+122,"Big Breakfast with Hotcakes and Egg Whites (Regular Biscuit)",158,NULL
+123,"Dr Pepper (Child)",650,100
+124,"Nonfat Latte (Small)",1192,100
+125,"Big Breakfast (Large Biscuit)",866,800
+126,"Kids French Fries",1142,110
+127,"Sweet Tea (Large)",1344,220
+128,"Buffalo Ranch McChicken",328,360
+129,"Nonfat Latte with Sugar Free French Vanilla Syrup (Medium)",314,170
+130,"Iced Coffee with Sugar Free French Vanilla Syrup (Large)",1037,160
+131,"Strawberry Banana Smoothie (Small)",982,210
+132,"Fruit 'n Yogurt Parfait",1087,150
+133,"Southern Style Chicken Biscuit (Large Biscuit)",414,470
+134,"Coca-Cola Classic (Medium)",177,200
+135,"Minute Maid 100% Apple Juice Box",619,80
+136,"Frappé Caramel (Small)",118,NULL
+137,"Quarter Pounder with Bacon & Cheese",1450,600
+138,"Jalapeño Double",679,430
+139,"Large French Fries",350,510
+140,"Oatmeal Raisin Cookie",1158,150
+141,"Strawberry Shake (Medium)",375,690
+142,"Southern Style Chicken Biscuit (Regular Biscuit)",662,NULL
+143,"Mocha with Nonfat Milk (Large)",462,390
+144,"Bacon Clubhouse Burger",1463,720
+145,"Latte with Sugar Free French Vanilla Syrup (Medium)",1252,260
+146,"Sausage Biscuit with Egg (Regular Biscuit)",184,510
+147,"Nonfat Hazelnut Latte (Medium)",584,250
+148,"Nonfat Caramel Mocha (Small)",810,250
+149,"McFlurry with Reese's Peanut Butter Cups (Snack)",1096,410
+150,"Caramel Iced Coffee (Medium)",430,180
+151,"Shamrock Shake (Large)",180,NULL
+152,"Frappé Mocha (Large)",963,670
+153,"Chocolate Shake (Large)",5,850
+154,"Premium Southwest Salad with Grilled Chicken",1205,290
+155,"Sausage Burrito",15,300
+156,"Filet-O-Fish",1118,390
+157,"Baked Apple Pie",1492,NULL
+158,"Diet Dr Pepper (Child)",1255,0
+159,"Dr Pepper (Small)",359,140
+160,"Vanilla Shake (Large)",1157,820
+161,"Nonfat French Vanilla Latte (Large)",841,300
+162,"Nonfat Caramel Latte (Small)",494,200
+163,"Frappé Mocha (Medium)",496,550
+164,"Iced Tea (Large)",1362,0
+165,"Hamburger",1473,240
+166,"Nonfat French Vanilla Latte (Medium)",980,NULL
+167,"Iced Nonfat Caramel Mocha (Small)",47,230
+168,"Latte (Small)",1416,170
+169,"Mocha with Nonfat Milk (Small)",464,270
+170,"Iced Tea (Medium)",791,0
+171,"Double Cheeseburger",1081,430
+172,"Regular Iced Coffee (Medium)",167,NULL
+173,"Chicken McNuggets (6 piece)",784,280
+174,"Hot Caramel Sundae",134,340
+175,"Honey Mustard Snack Wrap (Crispy Chicken)",1061,330
+176,"Kids Ice Cream Cone",1220,45
+177,"Premium McWrap Southwest Chicken (Crispy Chicken)",167,670
+178,"Hotcakes",765,350
+179,"Quarter Pounder with Bacon Habanero Ranch",211,610
+180,"Mocha (Medium)",439,410
+181,"Daily Double",1447,430
+182,"Dasani Water Bottle",1145,0
+183,"Mango Pineapple Smoothie (Small)",294,210
+184,"Apple Slices",131,15
+185,"Mocha (Small)",759,340
+186,"Chicken McNuggets (4 piece)",1310,NULL
+187,"Egg White Delight",893,250
+188,"Iced Caramel Mocha (Small)",455,280
+189,"Chicken McNuggets (20 piece)",1276,940
+190,"Premium McWrap Southwest Chicken (Grilled Chicken)",11,NULL
+191,"McFlurry with M&M’s Candies (Small)",159,650
+192,"McFlurry with Reese's Peanut Butter Cups (Medium)",221,810
+193,"French Vanilla Iced Coffee (Medium)",310,170
+194,"Minute Maid Orange Juice (Medium)",1494,NULL
+195,"Iced Mocha with Nonfat Milk (Small)",22,240
+196,"Iced Caramel Mocha (Large)",227,460
+197,"Chocolate Shake (Small)",1497,560
+198,"Premium Crispy Chicken Classic Sandwich",1235,510
+199,"Ranch Snack Wrap (Grilled Chicken)",592,280
+200,"Caramel Latte (Large)",784,430
+201,"Sausage Biscuit with Egg Whites (Regular Biscuit)",1087,460
+202,"Iced Tea (Child)",807,NULL
+203,"Diet Coke (Medium)",952,0
+204,"Diet Coke (Large)",365,0
+205,""Bacon",799,6.3 oz (178 g)
+206,"Blueberry Pomegranate Smoothie (Large)",1370,340
+207,"Hotcakes and Sausage",192,520
+208,"Strawberry Shake (Large)",685,850
+209,"Chipotle BBQ Snack Wrap (Grilled Chicken)",600,260
+210,"Nonfat Latte with Sugar Free French Vanilla Syrup (Small)",1394,140
+211,"Caramel Mocha (Small)",573,320
+212,"Iced Caramel Mocha (Medium)",1341,340
+213,"Hazelnut Iced Coffee (Large)",202,NULL
+214,"Sausage McMuffin",1241,370
+215,"Caramel Latte (Small)",792,270
+216,"Caramel Iced Coffee (Large)",394,260
+217,"Iced Coffee with Sugar Free French Vanilla Syrup (Medium)",357,120
+218,"Sausage Biscuit with Egg (Large Biscuit)",490,570
+219,"Premium Southwest Salad with Crispy Chicken",364,450
+220,"Minute Maid Orange Juice (Large)",1404,280
+221,"Sprite (Large)",520,280
+222,"Iced Coffee with Sugar Free French Vanilla Syrup (Small)",777,80
+223,"1% Low Fat Milk Jug",808,100
+224,""Bacon",904,7.1 oz (201 g)
+225,"Dr Pepper (Large)",991,270
+226,"Nonfat Latte (Large)",747,NULL
+227,"Caramel Iced Coffee (Small)",270,130
+228,"Mocha with Nonfat Milk (Medium)",711,330
+229,"Medium French Fries",190,340
+230,"McFlurry with Oreo Cookies (Snack)",217,340
+231,"Nonfat Caramel Mocha (Medium)",698,310
+232,"Shamrock Shake (Medium)",1295,660
+233,"Diet Dr Pepper (Small)",1160,0
+234,"Cinnamon Melts",690,NULL
+235,"French Vanilla Iced Coffee (Small)",1048,120
+236,"Vanilla Shake (Small)",1454,NULL
+237,"Sausage McMuffin with Egg",1239,450
+238,"Iced Nonfat Caramel Mocha (Large)",316,370
+239,"Hazelnut Iced Coffee (Small)",1090,130
+240,"Hazelnut Latte (Large)",286,430
+241,"Side Salad",1452,20
+242,"Big Breakfast with Egg Whites (Large Biscuit)",399,690
+243,"Sausage Biscuit (Regular Biscuit)",1485,430
+244,"Steak & Egg Biscuit (Regular Biscuit)",470,540
+245,"Fruit & Maple Oatmeal",857,290
+246,"Frappé Caramel (Large)",438,670
+247,"Strawberry Sundae",1335,280
+248,"McChicken",1265,360
+249,"French Vanilla Latte (Medium)",11,330
+250,"Premium Grilled Chicken Club Sandwich",1298,510
+251,"Chicken McNuggets (10 piece)",80,470
+252,"Big Breakfast with Hotcakes (Large Biscuit)",488,1150
+253,"Regular Iced Coffee (Large)",76,270
+254,"Iced Mocha (Large)",212,480
+255,"Premium Bacon Ranch Salad (without Chicken)",410,140
+256,"French Vanilla Latte (Large)",333,420
+257,""Bacon",971,5.9 oz (167 g)
+258,"Hazelnut Latte (Medium)",496,330
+259,"Nonfat Hazelnut Latte (Small)",1156,200
+260,"Steak & Egg McMuffin",658,430
