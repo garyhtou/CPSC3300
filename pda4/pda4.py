@@ -2,6 +2,7 @@ import sys
 import os
 import random
 from faker import Faker
+import csv
 
 generate = Faker()
 NULL = "NULL"
@@ -27,20 +28,15 @@ class McDonaldsMenu:
         first = True
         try:
             with open(f"{dir_path}/menu.csv") as file:
-                while (line := file.readline().strip()):
+                rows = csv.reader(file)
+                for row in rows:
                     if first:
                         # Don't process the CSV header (first line)
                         first = False
                         continue
 
-                    data = line.split(",")
-
-                    name = data[1]
-                    calories = data[3]
-
-                    # Remove leading and trailing quotes if they exist
-                    if name.startswith('"') and name.endswith('"'):
-                        name = name[1:-1]
+                    name = row[1]
+                    calories = row[3]
 
                     # Remove non-ascii characters
                     name = name.encode("ascii", "ignore").decode("ascii")
@@ -87,6 +83,7 @@ def randPhoneE164():
         # No more permutations left (1000 buffer)
         usedPhones.clear()
 
+    # Find a random unused (unique) phone number
     while True:
         phone = "+1 " + " ".join([series(3), series(3), series(4)])
         if phone not in usedPhones:
@@ -152,7 +149,9 @@ class Relation(object):
     def fkAttributeName(cls):
         """
         Return the column attribute name for when this relation is referenced as
-        a foreign key
+        a foreign key.
+        This assumes that the foreign key column name will be in the format of
+        "{relation name}_id". e.g. "customer_id".
 
         Returns:
             string: column attribute name
@@ -231,71 +230,93 @@ class Order(Relation):
     config = {
         "date": generate.date_time,
     }
-    # Order has a foreign key
+    # Order has a foreign key that references a customer and a store
     associations = [Customer, Store]
 
 
 class OrderItem(Relation):
-    config = {}
+    # OrderItem has a foreign key that references an item and an order.
+    # Other than those two columns, there are no other attributes.
     associations = [Order, Item]
 
 
 def export(relations):
     if len(relations) == 0:
+        print("No relations to export")
         return
 
     relationClass = type(relations[0])
     relationName = relationClass.__name__
+
     fileName = f"{relationName}.csv"
     filePath = f"{dir_path}/data/{fileName}"
     with open(filePath, "w") as file:
         file.write(relationClass.header() + "\n")
         for relation in relations:
+            if not isinstance(relation, relationClass):
+                print(f"{relationName} relation is not of type"
+                      "{relationClass}. Skipping")
+                continue
+
+            # Write relation (as a string) to the file
             file.write(str(relation) + "\n")
 
     print(f"\nExported {relationName} ({len(relations)} tuples) to {filePath}")
 
 
+def print_results(relations):
+    PRINT_LIMIT = 10
+
+    if len(relations) == 0:
+        print("No tuples to print.")
+        return
+
+    relationClass = type(relations[0])
+
+    print(f"\n\n\n{relationClass.__name__}")
+    print(relationClass.header())
+    [print(str(relation)) for relation in (
+        relations[:PRINT_LIMIT] if PRINT_LIMIT else relations)]
+
+    if PRINT_LIMIT and len(relations) > PRINT_LIMIT:
+        print(f"\n... ({len(relations) - PRINT_LIMIT} more tuples)")
+
+
 def main():
-    numTuples = 3_000
+    # Rough goal of number of tuples to generate
+    numTuples = 3_000  # this is the default value
     try:
+        # Override default value if command line argument is provided
         numTuples = int(sys.argv[1])
     except IndexError:
         pass
 
+    # Generate relations!
     customers = [Customer() for _ in range(numTuples)]
     items = [Item() for _ in range(numTuples)
              if Item.newRandMenuItem(Item) is not None]
     stores = [Store() for _ in range(numTuples)]
-    orders = [Order(associations=[random.choice(customers), random.choice(stores)])
-              for _ in range(numTuples)
-              ]
-
+    orders = [
+        Order(associations=[random.choice(customers), random.choice(stores)])
+        for _ in range(numTuples)
+    ]
     orderItems = []
     for order in orders:
-        orderItems.extend(
-            [OrderItem(associations=[order, random.choice(items)]) for _ in range(random.randint(1, 10))])
+        # Each order must have at least one order item, I am looping through
+        # the orders to generate the order items.
+        orderItems.extend([
+            OrderItem(associations=[order, random.choice(items)])
+            for _ in range(random.randint(1, 10))
+        ])
 
-    print("\n\n\nCUSTOMERS")
-    print(Customer.header())
-    [print(str(customer)) for customer in customers]
+    # Print the generated tuples for each relation
+    print_results(customers)
+    print_results(items)
+    print_results(stores)
+    print_results(orders)
+    print_results(orderItems)
 
-    print("\n\n\nITEMS")
-    print(Item.header())
-    [print(str(item)) for item in items]
-
-    print("\n\n\nSTORES")
-    print(Store.header())
-    [print(str(store)) for store in stores]
-
-    print("\n\n\nORDERS")
-    print(Order.header())
-    [print(str(order)) for order in orders]
-
-    print("\n\n\nORDER ITEMS")
-    print(OrderItem.header())
-    [print(str(orderItem)) for orderItem in orderItems]
-
+    # Export the generated tuples as CSV files
     print("\n\n\nEXPORTING")
     export(customers)
     export(items)
