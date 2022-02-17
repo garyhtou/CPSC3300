@@ -44,10 +44,22 @@ class McDonaldsMenu:
         return self.products.pop(random.randint(0, len(self.products) - 1))
 
 
+usedPhones = []
+
+
 def randPhoneE164():
     def series(size): return "".join(
         [str(random.randint(0, 9)) for _ in range(size)])
-    return "+1 " + " ".join([series(3), series(3), series(4)])
+
+    if len(usedPhones) == 10_000_000_000 - 1_000:
+        # No more permutations left (1000 buffer)
+        usedPhones.clear()
+
+    while True:
+        phone = "+1 " + " ".join([series(3), series(3), series(4)])
+        if phone not in usedPhones:
+            usedPhones.append(phone)
+            return phone
 
 
 class Relation(object):
@@ -182,7 +194,8 @@ def main():
         pass
 
     customers = [Customer() for _ in range(numTuples)]
-    items = [Item() for _ in range(numTuples) if Item.newRandMenuItem(Item) is not None]
+    items = [Item() for _ in range(numTuples)
+             if Item.newRandMenuItem(Item) is not None]
     stores = [Store() for _ in range(numTuples)]
     orders = [Order(associations=[random.choice(customers), random.choice(stores)])
               for _ in range(numTuples)
