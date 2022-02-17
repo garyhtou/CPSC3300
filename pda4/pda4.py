@@ -1,3 +1,15 @@
+"""
+Generate CSV files for PDA 4.
+Author: Gary Tou <gary@garytou.com> (https://garytou.com)
+
+The following relations (tables) are generated:
+- Customer
+- Item
+- Store
+- Order
+- OrderItem
+"""
+
 import sys
 import os
 import random
