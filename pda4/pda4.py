@@ -190,8 +190,7 @@ class Item(Relation):
         """
         Assign a new random menu item to the class. This is a janky way to make
         sure that `randItem` and `randCalories` return data that belong to the
-        same menu item (until the menu is exhausted this method is called
-        again).
+        same menu item (until this method is called again).
         """
         cls.menuItem = menu.randItem()
         return cls.menuItem
