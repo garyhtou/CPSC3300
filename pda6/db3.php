@@ -13,7 +13,7 @@
 // Connect to MySQL
 
 $servername = "cs100.seattleu.edu";
-$username = "user75";
+$username = "user18";
 $password = "1234abcdF!";
 
 $conn = mysql_connect($servername, $username, $password);
@@ -24,7 +24,7 @@ if (!$conn) {
 }
 
 // change to your default db
-$dbname = "bw_sailor";
+$dbname = "bw_db18"; 
 
 $db = mysql_select_db($dbname, $conn);
 if (!$db) {
