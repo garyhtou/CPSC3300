@@ -20,9 +20,20 @@ export default async function handler(req, res) {
 				FROM Items
 			) r
 			GROUP BY calories
-			ORDER BY average_price_cents DESC
+			ORDER BY calories ASC
 			LIMIT ${limit};
 			`,
+		});
+
+		// Convert price cents to dolar amount
+
+		results.map((row) => {
+			if (row.calories == null) {
+				row.calories = 'No Calorie Data';
+			}
+			row.average_price = '$' + Math.round(row.average_price_cents) / 100;
+			delete row['average_price_cents'];
+			return row;
 		});
 
 		res.status(200).json({ results, meta: { count: results.length } });

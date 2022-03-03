@@ -16,11 +16,11 @@ export default async function handler(req, res) {
 
 			res.status(200).json({ results, meta: { count: results.length } });
 		} else if (req.method == 'POST') {
-			const name = req.body.name;
-			const email = req.body.email;
-			const phone = req.body.phone;
+			const name = req.body.name?.trim();
+			const email = req.body.email?.trim();
+			const phone = req.body.phone?.trim();
 
-			if (!name.trim() || !email.trim() || !phone.trim()) {
+			if (!name || !email || !phone) {
 				res.status(400).json({
 					error: {
 						message:
@@ -34,12 +34,22 @@ export default async function handler(req, res) {
 			const escapedEmail = db.escape(email);
 			const escapedPhone = db.escape(phone);
 
-			const results = await execQuery({
+			const execResults = await execQuery({
 				query: `
 				INSERT INTO ${CustomersTable} (name, email, phone)
 				VALUES (${escapedName}, ${escapedEmail}, ${escapedPhone});
 				`,
 			});
+
+			const results = [
+				{
+					status: 'Success',
+					customer_id: execResults.insertId,
+					name: name,
+					email: email,
+					phone: phone,
+				},
+			];
 
 			res.status(200).json({ results, meta: { count: results.length } });
 		} else if (req.method == 'DELETE') {

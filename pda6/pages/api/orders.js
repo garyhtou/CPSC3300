@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 		return;
 	}
 
-	const name = req.query.name;
+	const name = req.query.name || '';
 	const limit = req.query.limit || 10;
 
 	try {

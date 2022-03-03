@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import '../styles/globals.css';
 import '@fontsource/roboto';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../styles/theme';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 function MyApp({ Component, pageProps }) {
 	return (
