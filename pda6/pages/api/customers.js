@@ -21,14 +21,12 @@ export default async function handler(req, res) {
 			const phone = req.body.phone;
 
 			if (!name.trim() || !email.trim() || !phone.trim()) {
-				res
-					.status(400)
-					.json({
-						error: {
-							message:
-								'Missing required fields. Name, Email, and Phone are required',
-						},
-					});
+				res.status(400).json({
+					error: {
+						message:
+							'Missing required fields. Name, Email, and Phone are required',
+					},
+				});
 				return;
 			}
 

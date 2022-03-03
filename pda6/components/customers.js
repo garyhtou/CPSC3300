@@ -64,7 +64,7 @@ export default function Customers() {
 			<Typography variant='h6' color='text.secondary' gutterBottom mt={3}>
 				Results
 			</Typography>
-			<Paper outlined elevation={0}>
+			<Paper elevation={0}>
 				<div style={{ height: 400, width: '100%' }}>
 					{customers != null ? (
 						<DataGrid
