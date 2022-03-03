@@ -130,17 +130,22 @@ export default function Playground({
 						Object.keys(results).map((table) => {
 							const tableResults = results[table];
 							return (
-								<div
-									style={{ height: 330, width: '100%', marginTop: '1rem' }}
-									key={endpoint + method + table}
-								>
-									<DataGrid
-										rows={tableResults}
-										columns={columns}
-										pageSize={tableResults.length}
-										getRowId={idKey ? (row) => row[idKey] : undefined}
-									/>
-								</div>
+								<>
+									<Typography variant='body1' mt={1} mb={0.1}>
+										<strong>{table}</strong>
+									</Typography>
+									<div
+										style={{ height: 330, width: '100%' }}
+										key={endpoint + method + table}
+									>
+										<DataGrid
+											rows={tableResults}
+											columns={columns}
+											pageSize={tableResults.length}
+											getRowId={idKey ? (row) => row[idKey] : undefined}
+										/>
+									</div>
+								</>
 							);
 						})
 					)}

@@ -22,7 +22,7 @@ const Homepage = () => {
 	const queries = [
 		{
 			title: 'Tables',
-			description: 'List table names and their attributes.',
+			description: 'List table names and their attributes (using DESCRIBE).',
 			endpoint: 'tables',
 			method: 'GET',
 			columns: [
