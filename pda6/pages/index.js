@@ -12,6 +12,7 @@ import {
 	CardContent,
 	CardActions,
 	Button,
+	AvatarGroup,
 } from '@mui/material';
 import Container from '@mui/material/Container';
 import Playground from '../components/playground';
@@ -290,50 +291,52 @@ const Homepage = () => {
 
 	return (
 		<>
-			<AppBar position='sticky'>
-				<Container maxWidth='xl'>
-					<Toolbar disableGutters>
-						<Typography
-							variant='h6'
-							noWrap
-							component='div'
-							sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-						>
-							{appName}
-						</Typography>
-
-						<Typography
-							variant='h6'
-							noWrap
-							component='div'
-							sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-						>
-							{appName}
-						</Typography>
-						<Box sx={{ flexGrow: 2, display: 'flex', flexDirection: 'row' }}>
-							Developed by{' '}
-							<Tooltip title='Gary Tou'>
-								<Avatar
-									alt='Gary Tou'
-									src='http://assets.garytou.com/profile/GaryTou.jpg'
-								/>
-							</Tooltip>
-							Gary Tou and
-							<Tooltip title='Castel Villalobos'>
-								<Avatar
-									alt='Castel Villalobos'
-									src='http://assets.garytou.com/profile/GaryTou.jpg'
-								/>
-							</Tooltip>
-							Castel Villalobos
-						</Box>
-					</Toolbar>
-				</Container>
-			</AppBar>
-			<Container maxWidth='md'>
+			<Container
+				maxWidth='md'
+				style={{ marginTop: '5rem', paddingBottom: '6rem' }}
+			>
 				<Typography variant='h1'>PDA 6</Typography>
+				<Box
+					display={'flex'}
+					flexDirection={'row'}
+					marginBottom={'0.5rem'}
+					alignItems={'flex-end'}
+				>
+					<AvatarGroup style={{ paddingRight: '0.5rem' }}>
+						<Tooltip title='Gary Tou'>
+							<Avatar
+								alt='Gary Tou'
+								src='https://assets.garytou.com/profile/GaryTou.jpg'
+							/>
+						</Tooltip>
+						<Tooltip title='Castel Villalobos'>
+							<Avatar alt='Castel Villalobos' src='C' />
+						</Tooltip>
+					</AvatarGroup>
+					<Typography variant='body2'>
+						Developed by{' '}
+						<Button variant='text' href='https://garytou.com' target={'_blank'}>
+							Gary Tou
+						</Button>{' '}
+						and
+						<Button
+							variant='text'
+							href='https://github.com/impropernoun'
+							target={'_blank'}
+						>
+							Castel Villalobos
+						</Button>{' '}
+					</Typography>
+				</Box>
+				<Typography variant='body1'>
+					An application that interacts with a database representing a fast food
+					restaurants business rules.
+				</Typography>
 				{queries.map((query) => (
-					<Card style={{ marginTop: '2rem' }} key={query.endpoint}>
+					<Card
+						style={{ marginTop: '2rem' }}
+						key={query.endpoint + query.method}
+					>
 						<CardContent>
 							<Typography variant='h4' color='text.secondary' gutterBottom>
 								{query.title}
@@ -351,6 +354,7 @@ const Homepage = () => {
 						</CardContent>
 					</Card>
 				))}
+				{/* Footer */}
 			</Container>
 		</>
 	);

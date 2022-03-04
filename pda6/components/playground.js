@@ -9,9 +9,10 @@ import {
 	Typography,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useMediaQuery } from '@mui/material';
+import theme from '../styles/theme';
 
 export default function Playground({
 	endpoint,
@@ -68,6 +69,8 @@ export default function Playground({
 		}
 	};
 
+	const mobile = useMediaQuery(theme.breakpoints.down('sm'));
+
 	return (
 		<>
 			{bodyParams && (
@@ -76,12 +79,16 @@ export default function Playground({
 						if (params[q]?.price == true) {
 							return (
 								<TextField
-									id={endpoint + method + q}
+									key={endpoint + method + q}
 									label={q}
 									variant={'outlined'}
 									type={'number'}
 									value={bodyParams[q] / 100.0}
-									style={{ marginRight: '0.5rem', width: '32%' }}
+									style={{
+										marginRight: mobile ? 0 : '0.5rem',
+										marginBottom: !mobile ? 0 : '1rem',
+										width: mobile ? '100%' : '32%',
+									}}
 									onChange={(e) => {
 										setQueryParams({
 											...bodyParams,
@@ -94,11 +101,15 @@ export default function Playground({
 
 						return (
 							<TextField
-								id={endpoint + method + q}
+								key={endpoint + method + q}
 								label={q}
 								variant={'outlined'}
 								value={bodyParams[q]}
-								style={{ marginRight: '0.5rem', width: '32%' }}
+								style={{
+									marginRight: mobile ? 0 : '0.5rem',
+									marginBottom: !mobile ? 0 : '1rem',
+									width: mobile ? '100%' : '32%',
+								}}
 								onChange={(e) => {
 									setQueryParams({
 										...bodyParams,
@@ -133,7 +144,7 @@ export default function Playground({
 			{!multiTable ? (
 				<div style={{ height: height, width: '100%' }}>
 					<DataGrid
-						rows={results}
+						rows={results || []}
 						columns={columns}
 						pageSize={pageSize}
 						rowsPerPageOptions={[5, 10, 20, 25, 50, 100]}
@@ -147,7 +158,7 @@ export default function Playground({
 					{results == null ? (
 						<div style={{ height: 400, width: '100%' }}>
 							<DataGrid
-								rows={results}
+								rows={results || []}
 								columns={columns}
 								rowsPerPageOptions={[]}
 							/>
@@ -156,14 +167,11 @@ export default function Playground({
 						Object.keys(results).map((table) => {
 							const tableResults = results[table];
 							return (
-								<>
+								<React.Fragment key={endpoint + method + table}>
 									<Typography variant='body1' mt={1.5} mb={0.5}>
 										<strong>{table}</strong>
 									</Typography>
-									<div
-										style={{ height: 330, width: '100%' }}
-										key={endpoint + method + table}
-									>
+									<div style={{ height: 330, width: '100%' }}>
 										<DataGrid
 											rows={tableResults}
 											columns={columns}
@@ -171,7 +179,7 @@ export default function Playground({
 											getRowId={idKey ? (row) => row[idKey] : undefined}
 										/>
 									</div>
-								</>
+								</React.Fragment>
 							);
 						})
 					)}
