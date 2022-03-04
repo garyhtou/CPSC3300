@@ -79,6 +79,42 @@ const Homepage = () => {
 					flex: 0.8,
 				},
 			],
+			params: {
+				limit: {
+					default: 25,
+					editable: true,
+				},
+			},
+		},
+		{
+			title: 'Menu Items',
+			description: 'The information regarding the available Items on the menu.',
+			endpoint: 'items',
+			method: 'GET',
+			columns: [
+				{ field: 'id', headerName: 'ID', minWidth: 40 },
+				{
+					field: 'name',
+					headerName: 'Name',
+					flex: 0.8,
+				},
+				{
+					field: 'price',
+					headerName: 'Price',
+					flex: 1,
+				},
+				{
+					field: 'calories',
+					headerName: 'Calories',
+					flex: 0.8,
+				},
+			],
+			params: {
+				limit: {
+					default: 25,
+					editable: true,
+				},
+			},
 		},
 		{
 			title: 'Orders',
@@ -115,6 +151,16 @@ const Homepage = () => {
 					flex: 0.6,
 				},
 			],
+			params: {
+				name: {
+					default: '',
+					editable: true,
+				},
+				limit: {
+					default: 25,
+					editable: true,
+				},
+			},
 			idKey: 'order_id',
 		},
 		{
@@ -131,11 +177,18 @@ const Homepage = () => {
 					flex: 2,
 				},
 			],
+			params: {
+				limit: {
+					default: 25,
+					editable: true,
+				},
+			},
 			idKey: 'calories',
 		},
 		{
 			title: 'Create a Customer',
 			description: 'Are you intersted in being a Customer? Sign up!',
+			height: 200,
 			endpoint: 'customers',
 			method: 'POST',
 			columns: [
@@ -176,6 +229,62 @@ const Homepage = () => {
 				},
 			},
 			idKey: 'customer_id',
+		},
+		{
+			title: 'Rising Prices!',
+			description:
+				"It's time to update the price of items. Enter an Item ID and it's new Price.",
+			height: 200,
+			endpoint: 'items',
+			method: 'PUT',
+			columns: [
+				{
+					field: 'id',
+					headerName: 'Item ID',
+					flex: 0.2,
+				},
+				{
+					field: 'name',
+					headerName: 'Name',
+					flex: 1.5,
+				},
+				{
+					field: 'calories',
+					headerName: 'Calories',
+					flex: 0.5,
+				},
+				{
+					field: 'price',
+					headerName: 'Price',
+					flex: 0.6,
+				},
+			],
+			params: {
+				id: {
+					default: '',
+					editable: true,
+				},
+				price: {
+					default: 500,
+					editable: true,
+					price: true,
+				},
+			},
+		},
+		{
+			title: 'Delete a Customer',
+			description:
+				"Provide a Customer ID to delete them. It's sad to see them go :(",
+			height: 200,
+			endpoint: 'customers',
+			method: 'DELETE',
+			columns: [{ field: 'status', headerName: 'Status', flex: 1 }],
+			params: {
+				id: {
+					default: '',
+					editable: true,
+				},
+			},
 		},
 	];
 
@@ -233,6 +342,7 @@ const Homepage = () => {
 							<Playground
 								endpoint={query.endpoint}
 								columns={query.columns}
+								height={query.height}
 								method={query.method}
 								params={query.params}
 								multiTable={query.multiTable}

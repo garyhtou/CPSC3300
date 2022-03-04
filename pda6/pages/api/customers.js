@@ -59,9 +59,19 @@ export default async function handler(req, res) {
 				return;
 			}
 
-			const results = await execQuery({
+			const execDelete = await execQuery({
 				query: `DELETE FROM ${CustomersTable} WHERE id = ${id};`,
 			});
+			console.log(execDelete);
+
+			if (execDelete.affectedRows === 0) {
+				res.status(404).json({ error: 'Customer not found' });
+				return;
+			}
+
+			const results = {
+				status: 'Success',
+			};
 
 			res.status(200).json({ results, meta: { count: results.length } });
 		} else {

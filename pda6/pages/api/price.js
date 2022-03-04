@@ -3,7 +3,7 @@ import db from '../../utils/db';
 
 const ItemsTable = 'Items';
 export default async function handler(req, res) {
-	if (req.method !== 'PUT') {
+	if (req.method != 'PUT') {
 		res.status(405).end();
 		return;
 	}

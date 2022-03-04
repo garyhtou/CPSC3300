@@ -20,6 +20,7 @@ export default function Playground({
 	params = null,
 	multiTable = false,
 	idKey = null,
+	height = 400,
 }) {
 	const url = `/api/${endpoint}`;
 
@@ -48,7 +49,8 @@ export default function Playground({
 		try {
 			const res = await axios(url, {
 				method: method,
-				data: bodyParams ? bodyParams : undefined,
+				data: bodyParams && method != 'GET' ? bodyParams : undefined,
+				params: bodyParams && method == 'GET' ? bodyParams : undefined,
 			});
 			const data = res.data;
 			console.log(res.data.results);
@@ -60,6 +62,7 @@ export default function Playground({
 			setError(
 				error.response?.data?.error?.message ||
 					error.response?.data?.error?.sqlMessage ||
+					error.response?.data?.error ||
 					'Invalid input!'
 			);
 		}
@@ -70,6 +73,25 @@ export default function Playground({
 			{bodyParams && (
 				<div style={{ marginTop: '2rem' }}>
 					{Object.keys(bodyParams).map((q) => {
+						if (params[q]?.price == true) {
+							return (
+								<TextField
+									id={endpoint + method + q}
+									label={q}
+									variant={'outlined'}
+									type={'number'}
+									value={bodyParams[q] / 100.0}
+									style={{ marginRight: '0.5rem', width: '32%' }}
+									onChange={(e) => {
+										setQueryParams({
+											...bodyParams,
+											[q]: Math.max(Math.round(e.target.value * 100), 0),
+										});
+									}}
+								/>
+							);
+						}
+
 						return (
 							<TextField
 								id={endpoint + method + q}
@@ -109,12 +131,12 @@ export default function Playground({
 				</small>
 			</Typography>
 			{!multiTable ? (
-				<div style={{ height: 400, width: '100%' }}>
+				<div style={{ height: height, width: '100%' }}>
 					<DataGrid
 						rows={results}
 						columns={columns}
 						pageSize={pageSize}
-						rowsPerPageOptions={[5, 10, 20, 25, 50]}
+						rowsPerPageOptions={[5, 10, 20, 25, 50, 100]}
 						onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
 						pagination
 						getRowId={results && idKey ? (row) => row[idKey] : undefined}
@@ -124,14 +146,18 @@ export default function Playground({
 				<>
 					{results == null ? (
 						<div style={{ height: 400, width: '100%' }}>
-							<DataGrid rows={results} columns={columns} />
+							<DataGrid
+								rows={results}
+								columns={columns}
+								rowsPerPageOptions={[]}
+							/>
 						</div>
 					) : (
 						Object.keys(results).map((table) => {
 							const tableResults = results[table];
 							return (
 								<>
-									<Typography variant='body1' mt={1} mb={0.1}>
+									<Typography variant='body1' mt={1.5} mb={0.5}>
 										<strong>{table}</strong>
 									</Typography>
 									<div

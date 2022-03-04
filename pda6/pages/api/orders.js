@@ -3,7 +3,7 @@ import execQuery from '../../helper/executeQuery';
 const CustomersTable = 'Customers';
 export default async function handler(req, res) {
 	// Only allow GET requests
-	if (req.method !== 'GET') {
+	if (req.method != 'GET') {
 		res.status(405).end();
 		return;
 	}
