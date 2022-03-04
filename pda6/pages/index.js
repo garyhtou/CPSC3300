@@ -23,7 +23,8 @@ const Homepage = () => {
 	const queries = [
 		{
 			title: 'Tables',
-			description: 'List table names and their attributes (using DESCRIBE).',
+			description:
+				'List table names and their attributes (using SQL DESCRIBE).',
 			height: 350,
 			endpoint: 'tables',
 			method: 'GET',
@@ -90,7 +91,7 @@ const Homepage = () => {
 		},
 		{
 			title: 'Menu Items',
-			description: 'The information regarding the available Items on the menu.',
+			description: 'The information regarding the Items on the menu.',
 			endpoint: 'items',
 			method: 'GET',
 			columns: [
@@ -168,7 +169,7 @@ const Homepage = () => {
 		{
 			title: 'Average Calories',
 			description:
-				'Calculate the average price of each Item, grouped by calories (in 100 intervals by default).',
+				'Calculate the average price of items, grouped by calories (in 100 range intervals by default).',
 			endpoint: 'calories',
 			method: 'GET',
 			columns: [
@@ -193,7 +194,8 @@ const Homepage = () => {
 		},
 		{
 			title: 'Create a Customer',
-			description: 'Are you intersted in being a Customer? Sign up!',
+			description:
+				'Are you intersted in being a Customer? Sign up! Give us your name, email, and phone number.',
 			height: 200,
 			endpoint: 'customers',
 			method: 'POST',
@@ -222,7 +224,7 @@ const Homepage = () => {
 			],
 			params: {
 				name: {
-					default: 'John',
+					default: '',
 					editable: true,
 				},
 				email: {
