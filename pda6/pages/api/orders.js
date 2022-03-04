@@ -10,8 +10,8 @@ export default async function handler(req, res) {
 	}
 
 	try {
-		const name = req.query.name || '';
-		if (!name.trim()) {
+		const name = req.query.name;
+		if (!name) {
 			res
 				.status(400)
 				.json({ error: { message: 'Invalid name.' } })
