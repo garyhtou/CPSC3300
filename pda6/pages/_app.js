@@ -6,6 +6,7 @@ import theme from '../styles/theme';
 import { ThemeProvider } from '@mui/material/styles';
 
 function MyApp({ Component, pageProps }) {
+	const siteName = 'CPSC 3300 PDA6 — Gary Tou & Castel Villalobos';
 	return (
 		<>
 			<Head>
@@ -14,11 +15,8 @@ function MyApp({ Component, pageProps }) {
 					content='minimum-scale=1, initial-scale=1, width=device-width'
 				/>
 				<meta httpEquiv='content-language' content='en' />
-				<meta
-					property='og:site_name'
-					content="Gary Tou's Assets"
-					key='ogsitename'
-				/>
+				<title>{siteName}</title>
+				<meta property='og:site_name' content={siteName} key='ogsitename' />
 			</Head>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
