@@ -24,6 +24,7 @@ const Homepage = () => {
 		{
 			title: 'Tables',
 			description: 'List table names and their attributes (using DESCRIBE).',
+			height: 350,
 			endpoint: 'tables',
 			method: 'GET',
 			columns: [
@@ -167,7 +168,7 @@ const Homepage = () => {
 		{
 			title: 'Average Calories',
 			description:
-				'Calculate the average price of each Item, grouped by calories (in 100 intervals).',
+				'Calculate the average price of each Item, grouped by calories (in 100 intervals by default).',
 			endpoint: 'calories',
 			method: 'GET',
 			columns: [
@@ -179,6 +180,10 @@ const Homepage = () => {
 				},
 			],
 			params: {
+				interval: {
+					default: 100,
+					editable: true,
+				},
 				limit: {
 					default: 25,
 					editable: true,
@@ -286,6 +291,7 @@ const Homepage = () => {
 					editable: true,
 				},
 			},
+			idKey: 'status',
 		},
 	];
 

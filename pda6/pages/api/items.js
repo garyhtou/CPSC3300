@@ -6,12 +6,21 @@ export default async function handler(req, res) {
 	try {
 		if (req.method == 'GET') {
 			const limit = req.query.limit || 10;
+			const escapedLimit = parseInt(limit);
+			if (isNaN(escapedLimit)) {
+				res
+					.status(400)
+					.json({ error: { message: 'Invalid limit.' } })
+					.end();
+				return;
+			}
+
 			const order =
 				(['ASC', 'DESC'].includes(req.query.order) ? req.query.order : null) ||
 				'ASC';
 
 			const results = await execQuery({
-				query: `SELECT * FROM ${itemsTable} ORDER BY id ${order} LIMIT ${limit};`,
+				query: `SELECT * FROM ${itemsTable} ORDER BY id ${order} LIMIT ${escapedLimit};`,
 			});
 			results.forEach((row) => {
 				row.price = '$' + Math.round(row.price_cents) / 100;
@@ -33,7 +42,7 @@ export default async function handler(req, res) {
 			}
 
 			const escapedId = db.escape(id);
-			const escapedPrice = parseInt(price);
+			const escapedPrice = db.escape(parseInt(price));
 
 			if (isNaN(escapedPrice)) {
 				res.status(400).json({ error: 'Price must be a number' });

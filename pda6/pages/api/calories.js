@@ -1,4 +1,5 @@
 import execQuery from '../../helper/executeQuery';
+import db from '../../utils/db';
 
 const CustomersTable = 'Customers';
 export default async function handler(req, res) {
@@ -8,20 +9,29 @@ export default async function handler(req, res) {
 		return;
 	}
 
-	const groupSize = req.query.groupSize || 100;
-	const limit = req.query.limit || 10;
-
 	try {
+		const groupSize = req.query.interval || 100;
+		const escapedGroupSize = db.escape(groupSize);
+		const limit = req.query.limit || 10;
+		const escapedLimit = parseInt(limit);
+		if (isNaN(escapedLimit)) {
+			res
+				.status(400)
+				.json({ error: { message: 'Invalid limit.' } })
+				.end();
+			return;
+		}
+
 		const results = await execQuery({
 			query: `
 			SELECT calories, AVG(price_cents) as average_price_cents
 			FROM (
-				SELECT ROUND(calories/${groupSize}) * ${groupSize} as calories, price_cents
+				SELECT ROUND(calories/${escapedGroupSize}) * ${escapedGroupSize} as calories, price_cents
 				FROM Items
 			) r
 			GROUP BY calories
 			ORDER BY calories ASC
-			LIMIT ${limit};
+			LIMIT ${escapedLimit};
 			`,
 		});
 

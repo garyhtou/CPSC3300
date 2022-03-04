@@ -2,13 +2,18 @@ import {
 	Alert,
 	Box,
 	Button,
+	CircularProgress,
 	Grid,
 	Paper,
 	Stack,
 	TextField,
 	Typography,
 } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import { LoadingButton } from '@mui/lab';
+import {
+	DataGrid,
+	GRID_ROW_GROUPING_SINGLE_GROUPING_FIELD,
+} from '@mui/x-data-grid';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useMediaQuery } from '@mui/material';
@@ -26,6 +31,7 @@ export default function Playground({
 	const url = `/api/${endpoint}`;
 
 	const [results, setResults] = useState(null);
+	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
 	const [pageSize, setPageSize] = useState(10);
@@ -48,6 +54,7 @@ export default function Playground({
 
 	const handleClick = async () => {
 		try {
+			setLoading(true);
 			const res = await axios(url, {
 				method: method,
 				data: bodyParams && method != 'GET' ? bodyParams : undefined,
@@ -66,7 +73,9 @@ export default function Playground({
 					error.response?.data?.error ||
 					'Invalid input!'
 			);
+			setResults(null);
 		}
+		setLoading(false);
 	};
 
 	const mobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -121,13 +130,14 @@ export default function Playground({
 					})}
 				</div>
 			)}
-			<Button
+			<LoadingButton
 				variant='contained'
 				onClick={handleClick}
 				style={{ marginTop: '1rem' }}
+				loading={loading}
 			>
 				Run Query
-			</Button>
+			</LoadingButton>
 			{error && (
 				<Alert severity='error' style={{ marginTop: '1rem' }}>
 					{error}
@@ -156,7 +166,7 @@ export default function Playground({
 			) : (
 				<>
 					{results == null ? (
-						<div style={{ height: 400, width: '100%' }}>
+						<div style={{ height: 300, width: '100%' }}>
 							<DataGrid
 								rows={results || []}
 								columns={columns}
@@ -171,11 +181,12 @@ export default function Playground({
 									<Typography variant='body1' mt={1.5} mb={0.5}>
 										<strong>{table}</strong>
 									</Typography>
-									<div style={{ height: 330, width: '100%' }}>
+									<div style={{ height: height, width: '100%' }}>
 										<DataGrid
 											rows={tableResults}
 											columns={columns}
 											pageSize={tableResults.length}
+											rowsPerPageOptions={[tableResults.length]}
 											getRowId={idKey ? (row) => row[idKey] : undefined}
 										/>
 									</div>

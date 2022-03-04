@@ -5,10 +5,18 @@ const CustomersTable = 'Customers';
 export default async function handler(req, res) {
 	try {
 		if (req.method == 'GET') {
-			const limit = req.query.limit || 10;
-			const order =
-				(['ASC', 'DESC'].includes(req.query.order) ? req.query.order : null) ||
-				'ASC';
+			const limit = parseInt(req.query.limit || 10);
+			if (isNaN(limit)) {
+				res
+					.status(400)
+					.json({ error: { message: 'Invalid limit.' } })
+					.end();
+				return;
+			}
+
+			const order = ['ASC', 'DESC'].includes(req.query.order)
+				? req.query.order
+				: 'ASC';
 
 			const results = await execQuery({
 				query: `SELECT * FROM ${CustomersTable} ORDER BY id ${order} LIMIT ${limit};`,
@@ -53,14 +61,16 @@ export default async function handler(req, res) {
 
 			res.status(200).json({ results, meta: { count: results.length } });
 		} else if (req.method == 'DELETE') {
-			const id = db.escape(req.body.id);
-			if (!id.trim()) {
+			const id = req.body.id?.trim();
+			if (!id) {
 				res.status(400).json({ error: 'Missing id' });
 				return;
 			}
 
+			const escapedId = db.escape(id);
+
 			const execDelete = await execQuery({
-				query: `DELETE FROM ${CustomersTable} WHERE id = ${id};`,
+				query: `DELETE FROM ${CustomersTable} WHERE id = ${escapedId};`,
 			});
 			console.log(execDelete);
 
@@ -69,9 +79,11 @@ export default async function handler(req, res) {
 				return;
 			}
 
-			const results = {
-				status: 'Success',
-			};
+			const results = [
+				{
+					status: 'Success',
+				},
+			];
 
 			res.status(200).json({ results, meta: { count: results.length } });
 		} else {
