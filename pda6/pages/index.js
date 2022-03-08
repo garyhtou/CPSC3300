@@ -1,19 +1,4 @@
-import {
-	AppBar,
-	Typography,
-	Toolbar,
-	Box,
-	IconButton,
-	MenuIcon,
-	Menu,
-	Tooltip,
-	Avatar,
-	Card,
-	CardContent,
-	CardActions,
-	Button,
-	AvatarGroup,
-} from '@mui/material';
+import { Typography, Box, Card, CardContent, Button } from '@mui/material';
 import Container from '@mui/material/Container';
 import Playground from '../components/playground';
 
@@ -310,17 +295,6 @@ const Homepage = () => {
 					marginBottom={'0.5rem'}
 					alignItems={'flex-end'}
 				>
-					<AvatarGroup style={{ paddingRight: '0.5rem' }}>
-						<Tooltip title='Gary Tou'>
-							<Avatar
-								alt='Gary Tou'
-								src='https://assets.garytou.com/profile/GaryTou.jpg'
-							/>
-						</Tooltip>
-						<Tooltip title='Castel Villalobos'>
-							<Avatar alt='Castel Villalobos' src='C' />
-						</Tooltip>
-					</AvatarGroup>
 					<Typography variant='body2'>
 						Developed by{' '}
 						<Button variant='text' href='https://garytou.com' target={'_blank'}>
