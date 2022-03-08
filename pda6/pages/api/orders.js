@@ -1,4 +1,5 @@
 import execQuery from '../../helper/executeQuery';
+import validateInt from '../../helper/validateInt';
 import db from '../../utils/db';
 
 const CustomersTable = 'Customers';
@@ -10,23 +11,10 @@ export default async function handler(req, res) {
 	}
 
 	try {
-		const name = req.query.name;
-		if (!name) {
-			res
-				.status(400)
-				.json({ error: { message: 'Invalid name.' } })
-				.end();
-			return;
-		}
+		const name = req.query.name || '';
 
-		const escapedName = db.escape(name);
 		const limit = req.query.limit || 10;
-		const escapedLimit = parseInt(limit);
-		if (isNaN(escapedLimit)) {
-			res
-				.status(400)
-				.json({ error: { message: 'Invalid limit.' } })
-				.end();
+		if (!validateInt(req, res, limit, 'limit')) {
 			return;
 		}
 
@@ -36,10 +24,11 @@ export default async function handler(req, res) {
 				o.date, o.store_id
 			FROM Orders o
 			INNER JOIN Customers c on o.customer_id = c.id
-			WHERE c.name LIKE '%${escapedName}%'
+			WHERE c.name LIKE ?
 			ORDER BY o.date DESC
-			LIMIT ${escapedLimit};
+			LIMIT ${limit};
 			`,
+			values: [`%${name}%`],
 		});
 
 		res.status(200).json({ results, meta: { count: results.length } });

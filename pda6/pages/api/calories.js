@@ -1,7 +1,6 @@
 import execQuery from '../../helper/executeQuery';
-import db from '../../utils/db';
+import validateInt from '../../helper/validateInt';
 
-const CustomersTable = 'Customers';
 export default async function handler(req, res) {
 	// Only allow GET requests
 	if (req.method != 'GET') {
@@ -11,14 +10,11 @@ export default async function handler(req, res) {
 
 	try {
 		const groupSize = req.query.interval || 100;
-		const escapedGroupSize = db.escape(groupSize);
+		if (!validateInt(req, res, groupSize, 'group size')) {
+			return;
+		}
 		const limit = req.query.limit || 10;
-		const escapedLimit = parseInt(limit);
-		if (isNaN(escapedLimit)) {
-			res
-				.status(400)
-				.json({ error: { message: 'Invalid limit.' } })
-				.end();
+		if (!validateInt(req, res, limit, 'limit')) {
 			return;
 		}
 
@@ -26,18 +22,17 @@ export default async function handler(req, res) {
 			query: `
 			SELECT calories, AVG(price_cents) as average_price_cents
 			FROM (
-				SELECT ROUND(calories/${escapedGroupSize}) * ${escapedGroupSize} as calories, price_cents
+				SELECT ROUND(calories/${groupSize}) * ${groupSize} as calories, price_cents
 				FROM Items
 			) r
 			GROUP BY calories
 			ORDER BY calories ASC
-			LIMIT ${escapedLimit};
+			LIMIT ${limit};
 			`,
 		});
 
 		// Convert price cents to dolar amount
-
-		results.map((row) => {
+		results.forEach((row) => {
 			if (row.calories == null) {
 				row.calories = 'No Calorie Data';
 			}

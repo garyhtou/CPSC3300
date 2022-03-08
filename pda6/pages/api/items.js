@@ -1,4 +1,5 @@
 import execQuery from '../../helper/executeQuery';
+import validateInt from '../../helper/validateInt';
 import db from '../../utils/db';
 
 const itemsTable = 'Items';
@@ -6,12 +7,7 @@ export default async function handler(req, res) {
 	try {
 		if (req.method == 'GET') {
 			const limit = req.query.limit || 10;
-			const escapedLimit = parseInt(limit);
-			if (isNaN(escapedLimit)) {
-				res
-					.status(400)
-					.json({ error: { message: 'Invalid limit.' } })
-					.end();
+			if (!validateInt(req, res, limit, 'limit')) {
 				return;
 			}
 
@@ -20,8 +16,10 @@ export default async function handler(req, res) {
 				'ASC';
 
 			const results = await execQuery({
-				query: `SELECT * FROM ${itemsTable} ORDER BY id ${order} LIMIT ${escapedLimit};`,
+				query: `SELECT * FROM ${itemsTable} ORDER BY id ${order} LIMIT ${limit};`,
 			});
+
+			// Convert price cents to humanized price
 			results.forEach((row) => {
 				row.price = '$' + Math.round(row.price_cents) / 100;
 				delete row.price_cents;
@@ -41,19 +39,18 @@ export default async function handler(req, res) {
 				return;
 			}
 
-			const escapedId = db.escape(id);
-			const escapedPrice = db.escape(parseInt(price));
-
-			if (isNaN(escapedPrice)) {
-				res.status(400).json({ error: 'Price must be a number' });
+			if (!validateInt(req, res, id, 'id')) {
+				return;
+			}
+			if (!validateInt(req, res, price, 'price')) {
 				return;
 			}
 
 			const execUpate = await execQuery({
 				query: `
 				UPDATE ${itemsTable}
-				SET price_cents = ${escapedPrice}
-				WHERE id = ${escapedId};
+				SET price_cents = ${price}
+				WHERE id = ${id};
 				`,
 			});
 			console.log(execUpate);
@@ -64,12 +61,11 @@ export default async function handler(req, res) {
 			}
 
 			// Tuple updated. Now get the updated value
-
 			const execResults = await execQuery({
 				query: `
 				SELECT *
 				FROM ${itemsTable}
-				WHERE id = ${escapedId};
+				WHERE id = ${id};
 				`,
 			});
 
@@ -78,16 +74,6 @@ export default async function handler(req, res) {
 				delete row.price_cents;
 				return row;
 			});
-
-			// [
-			// 	{
-			// 		status: 'Success',
-			// 		item_id: execResults[0].id,
-			// 		name: execResults[0].name,
-			// 		price: '$' + execResults[0].price_cents / 100,
-			// 		calories: execResults[0].calories,
-			// 	},
-			// ];
 
 			res.status(200).json({ results, meta: { count: results.length } });
 		} else {

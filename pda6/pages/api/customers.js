@@ -1,16 +1,12 @@
 import execQuery from '../../helper/executeQuery';
-import db from '../../utils/db';
+import validateInt from '../../helper/validateInt';
 
 const CustomersTable = 'Customers';
 export default async function handler(req, res) {
 	try {
 		if (req.method == 'GET') {
-			const limit = parseInt(req.query.limit || 10);
-			if (isNaN(limit)) {
-				res
-					.status(400)
-					.json({ error: { message: 'Invalid limit.' } })
-					.end();
+			const limit = req.query.limit || 10;
+			if (!validateInt(req, res, limit, 'limit')) {
 				return;
 			}
 
@@ -38,15 +34,12 @@ export default async function handler(req, res) {
 				return;
 			}
 
-			const escapedName = db.escape(name);
-			const escapedEmail = db.escape(email);
-			const escapedPhone = db.escape(phone);
-
 			const execResults = await execQuery({
 				query: `
 				INSERT INTO ${CustomersTable} (name, email, phone)
-				VALUES (${escapedName}, ${escapedEmail}, ${escapedPhone});
+				VALUES (?, ?, ?);
 				`,
+				values: [name, email, phone],
 			});
 
 			const results = [
@@ -66,11 +59,12 @@ export default async function handler(req, res) {
 				res.status(400).json({ error: 'Missing id' });
 				return;
 			}
-
-			const escapedId = db.escape(id);
+			if (!validateInt(req, res, id, 'id, must be an integer')) {
+				return;
+			}
 
 			const execDelete = await execQuery({
-				query: `DELETE FROM ${CustomersTable} WHERE id = ${escapedId};`,
+				query: `DELETE FROM ${CustomersTable} WHERE id = ${id};`,
 			});
 			console.log(execDelete);
 
@@ -81,7 +75,7 @@ export default async function handler(req, res) {
 
 			const results = [
 				{
-					status: 'Success',
+					status: `Success. Deleted Customer with id = ${id}`,
 				},
 			];
 

@@ -1,4 +1,5 @@
 import execQuery from '../../helper/executeQuery';
+import validateInt from '../../helper/validateInt';
 import db from '../../utils/db';
 
 const ItemsTable = 'Items';
@@ -10,22 +11,18 @@ export default async function handler(req, res) {
 
 	try {
 		const id = db.escape(req.query.id);
-		const price = parseInt(db.escape(req.query.price));
-
-		if (isNaN(price)) {
-			res
-				.status(400)
-				.json({ error: { message: 'Invalid price.' } })
-				.end();
+		const price = db.escape(req.query.price);
+		if (!validateInt(req, res, price, 'price')) {
 			return;
 		}
 
 		const results = await execQuery({
 			query: `
-			UPDATE ${ItemsTable}
-			SET price_cents = ${price}
-			WHERE id = ${id};
+			UPDATE ?
+			SET price_cents = ?
+			WHERE id = ?;
 			`,
+			values: [ItemsTable, price, id],
 		});
 
 		res.status(200).json({ results, meta: { count: results.length } });
